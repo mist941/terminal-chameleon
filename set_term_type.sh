@@ -2,6 +2,12 @@
 
 set -euo pipefail
 
+if [[ ! -v TERM ]] || ! command -v tput &>/dev/null; then
+    echo "Skipping terminal setup: missing TERM or tput"
+    exit 0
+fi
+    
+
 readonly COLORS=$(tput colors)
 
 if [[ "$COLORS" -ge 256 ]]; then
