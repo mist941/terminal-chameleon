@@ -2,11 +2,14 @@
 
 set -euo pipefail
 
-if [[ -v TMUX ]]; then
-    echo "tmux detected"
+readonly COLORS=$(tput colors)
+
+if [[ "$COLORS" -ge 256 ]]; then
+    export TERM="xterm-256color"
 fi
 
-if [[ -v SSH_CONNECTION ]]; then
-    echo "ssh conntection detected"
+
+if [[ -v TMUX ]]; then
+    export TERM="tmux-256color"
+    exit 0
 fi
-    
